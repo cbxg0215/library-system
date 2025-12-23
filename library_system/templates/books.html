@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>图书列表</title>
+  </head>
+  <body>
+    <h2>图书列表</h2>
+
+    <form method="get">
+      <input name="keyword" placeholder="搜索书名/作者" />
+      <button type="submit">搜索</button>
+    </form>
+
+    <table border="1">
+      <tr>
+        <th>书名</th>
+        <th>作者</th>
+        <th>ISBN</th>
+        <th>库存</th>
+        <th>操作</th>
+      </tr>
+
+      {% for b in books %}
+      <tr>
+        <td>{{ b[1] }}</td>
+        <td>{{ b[2] }}</td>
+        <td>{{ b[3] }}</td>
+        <td>{{ b[5] }}</td>
+        <td>
+          {% if b[5] > 0 %}
+          <a href="/borrow/{{ b[0] }}">借书</a>
+          {% else %} 不可借 {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <h3>管理员入库</h3>
+    <form method="post" action="/add_book">
+      <input name="title" placeholder="书名" />
+      <input name="author" placeholder="作者" />
+      <input name="isbn" placeholder="ISBN" />
+      <input name="total" placeholder="数量" />
+      <button>添加</button>
+    </form>
+
+    <a href="/my_borrow">我的借阅</a>
+  </body>
+</html>

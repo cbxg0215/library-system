@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>我的借阅</title>
+  </head>
+  <body>
+    <h2>借阅记录</h2>
+    <table border="1">
+      <tr>
+        <th>书名</th>
+        <th>借阅时间</th>
+        <th>归还时间</th>
+        <th>操作</th>
+      </tr>
+
+      {% for r in records %}
+      <tr>
+        <td>{{ r[1] }}</td>
+        <td>{{ r[2] }}</td>
+        <td>{{ r[3] }}</td>
+        <td>
+          {% if not r[3] %}
+          <a href="/return/{{ r[0] }}">还书</a>
+          {% else %} 已归还 {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <a href="/books">返回</a>
+  </body>
+</html>
